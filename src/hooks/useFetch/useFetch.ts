@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
-
-interface UseFetchResponse<TData> {
-  data: TData | null;
-  isLoading: boolean;
-  error: Error | null;
-}
+import { UseFetchResponse } from "./interface";
 
 export const useFetch = <TData = unknown>(
   url: string,

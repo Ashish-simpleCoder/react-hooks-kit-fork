@@ -1,19 +1,9 @@
 import { useState } from "react";
-
-type textType = string | number;
-
-type message = string;
-
-interface copiedValueInterface {
-  value?: textType | null;
-  error?: Error | null;
-  message: message;
-}
-
-interface CopyToClipboardInterface {
-  copiedRes: copiedValueInterface;
-  copyToClipboard: (text: textType) => void;
-}
+import {
+  CopyToClipboardInterface,
+  copiedValueInterface,
+  textType,
+} from "./interface";
 
 export const useCopyToClipboard = (): CopyToClipboardInterface => {
   const allowedType = ["string", "number"];
@@ -36,7 +26,7 @@ export const useCopyToClipboard = (): CopyToClipboardInterface => {
       if (!allowedType.includes(typeof text)) {
         return setCopiedRes({
           ...copiedRes,
-          message: `Cannot copy typeof ${typeof text} to clipboard`,
+          message: `Cannot copy typeof ${typeof text} to clipboard, It must be string or number`,
         });
       }
 
