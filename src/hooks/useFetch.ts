@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
 
-interface UseFetchResponse<T> {
-  data: T | null;
+interface UseFetchResponse<TData> {
+  data: TData | null;
   isLoading: boolean;
   error: Error | null;
 }
 
-export const useFetch = <T>(
+export const useFetch = <TData = unknown>(
   url: string,
   headers?: Record<string, string>
-): UseFetchResponse<T> => {
-  const [data, setData] = useState<T | null>(null);
+): UseFetchResponse<TData> => {
+  const [data, setData] = useState<TData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -19,8 +19,8 @@ export const useFetch = <T>(
     setIsLoading(true);
 
     try {
-      const response: AxiosResponse<T> = await axios.get(url, { headers });
-      const data = response.data;
+      const response: AxiosResponse<TData> = await axios.get(url, { headers });
+      const data = response.data as TData;
       setData(data);
     } catch (error) {
       setError(error as Error);

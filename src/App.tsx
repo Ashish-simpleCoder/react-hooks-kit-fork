@@ -1,24 +1,39 @@
 import "./App.css";
-import { useFetch } from "./hooks/useFetch";
+import { useCopyToClipboard } from "./hooks/useCopyToClipboard";
+// import { useFetch } from "./hooks/useFetch";
+
+// export interface Post {
+//   userId: number;
+//   id: number;
+//   title: string;
+//   body: string;
+// }
 
 function App() {
-  const url = "http://192.168.1.11:8004/admin/category?page=1&limit=10";
-  const headers = {
-    Authorization:
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoxLCJpYXQiOjE2ODc0MzgwOTQsImV4cCI6MTY4ODA0Mjg5NH0.kJbZit6GGZj3-_15XjSAxTImdCc3WDta2SdQhH1kCno",
-    "Content-Type": "application/json",
-  };
+  // const url = "http://jsonplaceholder.typicode.com/posts";
 
-  const { data, error, isLoading } = useFetch(url, headers);
+  // const { data, error, isLoading } = useFetch<Post[]>(url);
 
-  console.log("error", error);
+  const { copiedRes, copyToClipboard } = useCopyToClipboard();
 
-  console.log(isLoading ? "Loading..." : data);
+  console.log(copiedRes);
+
+  console.log(typeof copiedRes.value);
 
   return (
     <>
       <div>
         <h1>React Custom Hook</h1>
+        <div style={{ display: "flex" }}>
+          {/* <button onClick={() => copyToClipboard({ a: "A" })}>A</button> */}
+          <button onClick={() => copyToClipboard("B")}>B</button>
+          <button onClick={() => copyToClipboard("C")}>C</button>
+        </div>
+        <pre>Copied value: {copiedRes.value ?? "Nothing is copied yet!"}</pre>
+
+        {/* {!isLoading
+          ? data?.map((list) => <li key={list.id}>{list.title}</li>)
+          : "loading..."} */}
       </div>
     </>
   );
