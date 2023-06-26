@@ -10,7 +10,7 @@ export interface Post {
 
 function Demo() {
   // case 1: without any header object
-  const url = "http://jsonplaceholder.typicode.com/posts";
+  const url = "https://jsonplaceholder.typicode.com/posts";
   const { data, error, isLoading, fetchData } = useFetch<Post[]>();
 
   // case 2: with header object
