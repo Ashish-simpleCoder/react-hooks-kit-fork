@@ -1,16 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { UseFetchResponse } from "./interface";
 
-export const useFetch = <TData = unknown>(
-  url: string,
-  headers?: Record<string, string>
-): UseFetchResponse<TData> => {
+export const useFetch = <TData = unknown>(): UseFetchResponse<TData> => {
   const [data, setData] = useState<TData | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const fetchData = async () => {
+  const fetchData = async (url: string, headers?: Record<string, string>) => {
     setIsLoading(true);
 
     try {
@@ -24,9 +21,5 @@ export const useFetch = <TData = unknown>(
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [url]);
-
-  return { data, isLoading, error };
+  return { data, isLoading, error, fetchData };
 };

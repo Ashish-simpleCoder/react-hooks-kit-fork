@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useFetch } from "./useFetch";
 
 export interface Post {
@@ -10,16 +11,18 @@ export interface Post {
 function Demo() {
   // case 1: without any header object
   const url = "http://jsonplaceholder.typicode.com/posts";
-  const { data, error, isLoading } = useFetch<Post[]>(url);
+  const { data, error, isLoading, fetchData } = useFetch<Post[]>();
 
   // case 2: with header object
-  //   const headers = {
-  //     Autherization: "TOKEN",
-  //     Content_Type: "application/json",
-  //   };
+  // const headers = {
+  //   Autherization: "TOKEN",
+  //   Content_Type: "application/json",
+  // };
 
-  //   const url = "http://jsonplaceholder.typicode.com/posts";
-  //   const { data, error, isLoading } = useFetch<Post[]>(url, headers);
+  useEffect(() => {
+    fetchData(url); // case: 1
+    // fetchData(url, headers); // case: 2
+  }, [url]);
 
   if (error) {
     return <p>Something went wrong! The error is: {error.message}</p>;
