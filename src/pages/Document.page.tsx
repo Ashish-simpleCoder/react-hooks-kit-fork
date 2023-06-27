@@ -1,3 +1,9 @@
+import { UseLocalStorageDemo } from "../hooks/useLocalStorage/useLocalStorage.demo";
+
 export const DocumentPage = () => {
-  return <div>Document Page</div>;
+   return (
+      <div>
+         <UseLocalStorageDemo />
+      </div>
+   );
 };

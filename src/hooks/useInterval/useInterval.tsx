@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 type Options = {
-  delay: number;
+   delay: number;
 };
 
 /**
@@ -14,20 +14,20 @@ type Options = {
  */
 
 export default function useInterval(
-  callback: () => void,
-  options: Options = { delay: 0 }
+   callback: () => void,
+   options: Options = { delay: 0 }
 ) {
-  if (isNaN(options.delay))
-    throw Error(
-      "value provided for delay parameter is invalid. Only number is valid."
-    );
+   if (isNaN(options.delay))
+      throw Error(
+         "value provided for delay parameter is invalid. Only number is valid."
+      );
 
-  useEffect(() => {
-    let interval_id: NodeJS.Timer;
-    interval_id = setInterval(callback, options.delay);
+   useEffect(() => {
+      let interval_id: NodeJS.Timer;
+      interval_id = setInterval(callback, options.delay);
 
-    return () => {
-      clearInterval(interval_id);
-    };
-  }, []);
+      return () => {
+         clearInterval(interval_id);
+      };
+   }, []);
 }
