@@ -1,20 +1,20 @@
-import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import { HomePage } from "./pages/Home.page";
+import { DocumentPage } from "./pages/Document.page";
 import "./App.css";
-import Fetch from "./hooks/useFetch/Demo";
-import Copy from "./hooks/useCopyToClipboard/Demo";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
 
 function App() {
-  const [state, setState] = useState("copy");
-
   return (
-    <div>
-      <p>Custom hook</p>
-      <button onClick={() => setState("fetch")}>useFetch</button>
-      <button onClick={() => setState("copy")}>useCopyToClipboard</button>
-
-      {state === "fetch" && <Fetch />}
-      {state === "copy to clipboard" && <Copy />}
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/react-hooks" element={<DocumentPage />} />
+      </Routes>
+      <Footer />
+    </>
   );
 }
 
